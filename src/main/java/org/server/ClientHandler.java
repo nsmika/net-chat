@@ -48,12 +48,12 @@ public class ClientHandler implements Runnable {
             broadcastMessage(goodbyeMessage);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logMessage("Error: " + e.getMessage());
         } finally {
             try {
                 socket.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                logMessage("Error: " + e.getMessage());
             }
             clientHandlers.remove(this);
         }

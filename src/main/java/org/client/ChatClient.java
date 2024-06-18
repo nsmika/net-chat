@@ -6,16 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 
-
 public class ChatClient {
     private static final String SETTINGS_FILE = "settings.txt";
     private static final String LOG_FILE = "client.log";
     private static String host;
     private static int port;
-    private Socket socket;
-    private PrintWriter out;
-    private BufferedReader in;
-    private BufferedReader consoleInput;
 
     public static void main(String[] args) {
         loadSettings();
@@ -34,18 +29,16 @@ public class ChatClient {
     }
 
     public void start() {
-        try {
-            socket = new Socket(host, port);
-            out = new PrintWriter(socket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            consoleInput = new BufferedReader(new InputStreamReader(System.in));
-
+        try (Socket socket = new Socket(host, port);
+             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+             BufferedReader consoleInput = new BufferedReader(new InputStreamReader(System.in))) {
 
             System.out.print(in.readLine());
             String username = consoleInput.readLine();
             out.println(username);
 
-            new Thread(new IncomingReader()).start();
+            new Thread(new IncomingReader(in)).start();
             String message;
             while ((message = consoleInput.readLine()) != null) {
                 if (message.equalsIgnoreCase("/exit")) {
@@ -57,15 +50,14 @@ public class ChatClient {
                 out.println(message);
                 logMessage(String.format("[%s] %s: %s",
                         new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()), username, message));
+
+                // Тест вызова ошибки и ее логирования
+//                if (message.equalsIgnoreCase("/error")) {
+//                    throw new IOException("Simulated IOException");
+//                }
             }
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                socket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            logMessage("Error: " + e.getMessage());
         }
     }
 
@@ -80,6 +72,12 @@ public class ChatClient {
     }
 
     private class IncomingReader implements Runnable {
+        private final BufferedReader in;
+
+        public IncomingReader(BufferedReader in) {
+            this.in = in;
+        }
+
         @Override
         public void run() {
             String message;
@@ -88,7 +86,7 @@ public class ChatClient {
                     System.out.println(message);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                logMessage("Error: " + e.getMessage());
             }
         }
     }

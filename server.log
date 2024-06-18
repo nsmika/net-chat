@@ -26,3 +26,16 @@
 [2024-06-16 11:23:05] Netologi: Hello
 [2024-06-16 11:23:12] Netologi: Test server
 [2024-06-16 11:23:18] Server: Netologi has left the chat
+[2024-06-18 20:27:55] Server: TestUser1 has joined the chat
+[2024-06-18 20:28:07] TestUser1: Hello
+[2024-06-18 20:28:40] TestUser1: 
+[2024-06-18 20:28:55] TestUser1: null
+[2024-06-18 20:29:01] Server: TestUser1 has left the chat
+[2024-06-18 20:31:34] Server: TestUser2 has joined the chat
+[2024-06-18 20:31:41] Server: TestUser2 has left the chat
+[2024-06-18 20:37:49] Server: TestUser3 has joined the chat
+[2024-06-18 20:37:54] TestUser3: Hello
+[2024-06-18 20:38:00] TestUser3: error test
+[2024-06-18 20:38:05] TestUser3: /error
+[2024-06-18 20:46:10] Server: null has joined the chat
+Error: Программа на вашем хост-компьютере разорвала установленное подключение
