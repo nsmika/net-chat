@@ -86,7 +86,7 @@ public class ChatClient {
                     System.out.println(message);
                 }
             } catch (IOException e) {
-                logMessage("Error: " + e.getMessage());
+                logMessage(e.getMessage());
             }
         }
     }

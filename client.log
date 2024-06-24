@@ -35,3 +35,18 @@ Error: Connection refused: connect
 Error: Connection reset
 Error: Simulated IOException
 Error: Stream closed
+[2024-06-24 20:06:38] TestUser1: hi
+[2024-06-24 20:06:55] TestUser1: server works bad
+[2024-06-24 20:07:00] TestUser1: goodbye
+[2024-06-24 20:07:03] TestUser1: disconnect
+[2024-06-24 20:13:53] TestUser2: hello
+[2024-06-24 20:14:04] TestUser2: it works, ok
+[2024-06-24 20:14:09] TestUser2: disconnect
+Error: Stream closed
+[2024-06-24 20:15:50] TestUser3: disconnect
+[2024-06-24 20:17:19] TestUser4: hi
+[2024-06-24 20:17:23] TestUser4: disconnect
+Error: Connection refused: connect
+[2024-06-24 20:29:17] FinalTestUser: hello
+[2024-06-24 20:29:30] FinalTestUser: disconnect
+Stream closed

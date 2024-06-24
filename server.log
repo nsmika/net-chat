@@ -39,3 +39,17 @@
 [2024-06-18 20:38:05] TestUser3: /error
 [2024-06-18 20:46:10] Server: null has joined the chat
 Error: Программа на вашем хост-компьютере разорвала установленное подключение
+[2024-06-24 20:06:31] Server: TestUser1 has joined the chat
+Error: Socket closed
+[2024-06-24 20:13:47] Server: TestUser2 has joined the chat
+[2024-06-24 20:13:53] TestUser2: hello
+[2024-06-24 20:14:04] TestUser2: it works, ok
+[2024-06-24 20:14:09] Server: TestUser2 has left the chat
+[2024-06-24 20:15:46] Server: TestUser3 has joined the chat
+[2024-06-24 20:15:50] Server: TestUser3 has left the chat
+[2024-06-24 20:17:15] Server: TestUser4 has joined the chat
+[2024-06-24 20:17:19] TestUser4: hi
+[2024-06-24 20:17:23] Server: TestUser4 has left the chat
+[2024-06-24 20:29:13] Server: FinalTestUser has joined the chat
+[2024-06-24 20:29:17] FinalTestUser: hello
+[2024-06-24 20:29:30] Server: FinalTestUser has left the chat

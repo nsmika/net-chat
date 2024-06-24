@@ -10,25 +10,17 @@ public class ClientHandler implements Runnable {
     private static final String LOG_FILE = "server.log";
     private final Socket socket;
     private final Set<ClientHandler> clientHandlers;
-    protected PrintWriter out;
-    private BufferedReader in;
-    private String username;
 
     public ClientHandler(Socket socket, Set<ClientHandler> clientHandlers) {
         this.socket = socket;
         this.clientHandlers = clientHandlers;
-        try {
-            out = new PrintWriter(socket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void run() {
-        try {
+        try (PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
             out.println("Enter your username: ");
-            username = in.readLine();
+            String username = in.readLine();
             String welcomeMessage = formatMessage("Server", username + " has joined the chat");
             logMessage(welcomeMessage);
             broadcastMessage(welcomeMessage);
@@ -76,7 +68,12 @@ public class ClientHandler implements Runnable {
 
     protected void broadcastMessage(String message) {
         for (ClientHandler clientHandler : clientHandlers) {
-            clientHandler.out.println(message);
+            try {
+                PrintWriter clientOut = new PrintWriter(clientHandler.socket.getOutputStream(), true);
+                clientOut.println(message);
+            } catch (IOException e) {
+                logMessage("Error: " + e.getMessage());
+            }
         }
     }
 }
